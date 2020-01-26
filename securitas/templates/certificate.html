@@ -1,0 +1,48 @@
+{% extends "with_navbar.html" %}
+{% block title %}Certificate Generation{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+  <div class="container section">
+    <div class="row">
+      <div class="col s12">
+        <h2 class="header light-blue-text text-darken-4 fw300">X.509 Certificate Generation</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <form action="{{ url_for('certificate_generate') }}" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+          <div class="card">
+            <div class="card-content">
+
+              <span class="card-title">Certificate Request</span>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  Paste your Certificate Signing Request:
+                  <textarea placeholder="-----BEGIN CERTIFICATE REQUEST-----
+MIICzDCCAbQCAQAwgYYxCzAJBgNVBAYTAkVOMQ0wCwYDVQQIDARub25lMQ0wCwYD
+VQQHDARub25lMRIwEAYDVQQKDAlXaWtpcGVkaWExDTALBgNVBAsMBG5vbmUxGDAW
+[...]" style="min-height: 200px;" id="csr" name="csr" type="text" class="materialize-textarea" tabindex="1"></textarea>
+                  <label for="csr">Certificate Signing Request</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <button class="btn waves-effect waves-light light-blue darken-4 w100" id="submit" type="submit" tabindex="3">Generate Certificate</button>
+                </div>
+              </div>
+
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

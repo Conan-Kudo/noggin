@@ -2,6 +2,7 @@ from flask import g, render_template, request, redirect, url_for, session, jsoni
 
 from securitas import app
 from securitas.controller.authentication import login, logout  # noqa: F401
+from securitas.controller.certificate import certificate_generate  # noqa: F401
 from securitas.controller.group import group, groups  # noqa: F401
 from securitas.controller.password import password_reset  # noqa: F401
 from securitas.controller.registration import register  # noqa: F401
