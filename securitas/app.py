@@ -3,6 +3,7 @@ from flask import g, render_template, session
 from securitas import app
 from securitas.controller.authentication import login, logout  # noqa: F401
 from securitas.controller.group import group, groups  # noqa: F401
+from securitas.controller.otp import otp_listing  # noqa: F401
 from securitas.controller.password import password_reset  # noqa: F401
 from securitas.controller.registration import register  # noqa: F401
 from securitas.controller.root import root, search_json  # noqa: F401
