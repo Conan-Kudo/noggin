@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+
+{% block title %}Add OTP Token{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+	{% if form.errors %}
+        <ul class="errors">
+          {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+          {% for error in field_errors %}
+          <li>{{ form[field_name].label }}: {{ error }}</li>
+          {% endfor %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+	<form action="{{ url_for('otp_add') }}" method="post">
+          {{ form.csrf_token }}
+	  <div class="row">
+	    <div class="col-12">
+	      {{ form.description.label }}
+	      {{ form.description }}
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="col-12">
+              <button class="btn btn-primary" id="submit" type="submit">
+		Submit
+	      </button>
+	    </div>
+	  </div>
+	</form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -2,6 +2,7 @@ from flask import flash, redirect, render_template, session, url_for
 import python_freeipa
 
 from securitas import app
+from securitas.form.otp import OTPForm
 from securitas.representation.otptoken import OTPToken
 from securitas.utility import with_ipa
 
@@ -30,8 +31,11 @@ def otp_delete(ipa, tokenid):
         flash('Could not delete the token.', 'danger')
     return redirect(url_for('otp_listing'))
 
-@app.route('/otp/add/')
+@app.route('/otp/add/', methods=['GET', 'POST'])
 @with_ipa(app, session)
 def otp_add(ipa):
-    # TODO
-    return render_template('otp/list.html', tokens=[])
+    form = OTPForm()
+    if form.validate_on_submit():
+        flash('W00T', 'success')
+        return redirect(url_for('otp_listing'))
+    return render_template('otp/add.html', form=form)
