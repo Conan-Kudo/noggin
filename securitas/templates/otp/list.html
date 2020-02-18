@@ -9,6 +9,14 @@
 	<a href="{{ url_for('otp_add') }}" class="btn btn-success">Add Token</a>
       </div>
     </div>
+    {% if otp_uri %}
+      {# TODO: Make this a modal #}
+      <div class="row mb-4">
+	<div class="col-12">
+	  <div id="qrcode"></div>
+	</div>
+      </div>
+    {% endif %}
     <div class="row">
       <div class="col-12">
 	<table class="table">
@@ -36,4 +44,14 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {% if otp_uri %}
+    {# TODO: slurp this file into the repo if we care that we're using a CDN #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    {# TODO: We should avoid |safe here somehow, instead of trusting the IPA server response. #}
+    <script>$('#qrcode').qrcode("{{ otp_uri|safe }}");</script>
+  {% endif %}
 {% endblock %}
